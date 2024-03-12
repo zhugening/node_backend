@@ -22,10 +22,28 @@ export const register = async (req, res)=>{
     }
 }
 
+// export const login = async (req, res ) => {
+//     try {
+//         const loggedInUser = await loginUser(req.body)
+//         // const {password, ...data} = loggedInUser._doc;
+
+//         res.status(200).json({
+//             message: "User logged In succesfully",
+//             data,
+//         })
+//     } catch (error) {
+//         res.status(500).json({
+//             error: error,
+//             message: "Error Occurred Logging the User",
+//         });
+//         console.log(error);
+//     }
+// };
+
 export const login = async (req, res ) => {
     try {
-        const loggedInUser = await loginUser(req.body)
-        const {password, ...data} = loggedInUser._doc;
+        await deleteUser(req.params.id)
+        // const {password, ...data} = loggedInUser._doc;
 
         res.status(200).json({
             message: "User logged In succesfully",
@@ -34,7 +52,7 @@ export const login = async (req, res ) => {
     } catch (error) {
         res.status(500).json({
             error: error,
-            message: "Error Occurred Logging User In",
+            message: "Error Occurred Deleting the User",
         });
         console.log(error);
     }
