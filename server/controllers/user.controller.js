@@ -1,4 +1,4 @@
-import { deleteUser, updateUser , getUser } from "../services/user.service.js";
+import { deleteUser, updateUser , getUser, followUser } from "../services/user.service.js";
 
 export const updateUserController = async (req, res) => {
     if (req.body.userId === req.params.id || req.body.isAdmin) {
@@ -9,7 +9,7 @@ export const updateUserController = async (req, res) => {
                 message: "Account has been updated Successfully"
                 });
             } catch (err) {
-                console.log(err);
+                // console.log(err);
                 res.status(500).json(err);
             }
         } else { 
@@ -27,13 +27,13 @@ export const deleteUserController = async (req, res) => {
                 message: "Account has been deleted Successfully"
             });
         } catch (err) {
-            console.log(err)
+            // console.log(err)
             res.status(500).json(err)
         }    
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         res.status(500).json("you can only delete your account")
-    }
+    } 
 }
 };
 
@@ -46,7 +46,35 @@ export const getUserController = async (req, res) => {
             message: "Account has been fetched Successfully"
         });
     } catch (err) {
-        console.log(err)
+        // console.log(err)
+        res.status(500).json(err)
+    }
+
+};
+
+export const followUserController = async (req, res) => {
+    try {
+        const data = await followUser(req.body, req.params);
+        res.status(200).json({
+            data,
+            message: "Account has been fetched Successfully"
+        });
+    } catch (err) {
+        // console.log(err)
+        res.status(500).json(err)
+    }
+
+};
+
+export const unfollowUserController = async (req, res) => {
+    try {
+        const data = await unfollowUser(req.body, req.params);
+        res.status(200).json({
+            data,
+            message: "Account has been fetched Successfully"
+        });
+    } catch (err) {
+        // console.log(err)
         res.status(500).json(err)
     }
 

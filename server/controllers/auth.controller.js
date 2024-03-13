@@ -42,7 +42,7 @@ export const register = async (req, res)=>{
 
 export const login = async (req, res ) => {
     try {
-        await deleteUser(req.params.id)
+        const data = await deleteUser(req.params.id)
         // const {password, ...data} = loggedInUser._doc;
 
         res.status(200).json({

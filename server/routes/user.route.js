@@ -1,5 +1,5 @@
 import express from "express";
-import { deleteUserController, getUserController, updateUserController } from "../controllers/user.controller.js";
+import { deleteUserController, followUserController, getUserController, updateUserController , unfollowUserController} from "../controllers/user.controller.js";
 
 const router = express.Router();
 
@@ -14,5 +14,12 @@ router.put("/:id", updateUserController)
 router.delete("/:id", deleteUserController)
 //get USER
 router.get("/:id", getUserController)
+
+//follow a user
+router.put("/folow/:id", followUserController)
+
+//unfollow User
+router.put("/unfolow/:id", unfollowUserController)
 // module.exports = router;
+
 export default router;
