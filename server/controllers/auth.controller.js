@@ -1,6 +1,7 @@
 import UserModel from "../models/user.model.js";
 import bcrypt from "bcrypt"
 import { loginUser, registerUser } from "../services/auth.service.js";
+import { deleteUser } from "../services/user.service.js";
 // Register
 
 export const register = async (req, res)=>{
