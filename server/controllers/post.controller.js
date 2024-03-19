@@ -1,4 +1,4 @@
-import { createPost , likeAndDislike, updatedPost } from "../services/post.service.js";
+import { createPost , getTimelinePost, likeAndDislike, updatedPost } from "../services/post.service.js";
 
 export const createPostController = async(req, res) => {
     try {
@@ -51,7 +51,7 @@ export const deletedPostController = async(req, res) => {
     }
 };
 
-export const likeAndDislikeController = async(req, res) =>{
+export const likeAndDislikeController = async (req, res) =>{
     try {
         const post = await likeAndDislike(req.params, res.body);
         res.status(200).json({
@@ -62,6 +62,40 @@ export const likeAndDislikeController = async(req, res) =>{
         console.log(err);
         res.status(500).json({
             message: "Post Like or dislike action failed",
+            err,
+        });
+    }
+};
+
+
+export const getPostController = async (req, res) =>{
+    try {
+        const post = await getPost(req.params);
+        res.status(200).json({
+            post,
+            message: "Post action has been fetch Succesfully" ,
+        });
+    } catch (err){
+        console.log(err);
+        res.status(500).json({
+            message: "Post fetch failed",
+            err,
+        });
+    }
+};
+
+
+export const getTimelinePostsController = async (req, res) =>{
+    try {
+        const timelinePosts = await getTimelinePost(req.body);
+        res.status(200).json({
+            timelinePosts,
+            message: "Timeline Post fetched Successfully",
+        });
+    } catch (err){
+        console.log(err);
+        res.status(500).json({
+            message: "Post fetch failed",
             err,
         });
     }
