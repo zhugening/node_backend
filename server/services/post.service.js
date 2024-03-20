@@ -14,14 +14,15 @@ export const createPost = async (body) => {
 };
 
 
-export const updatedPost = async (params, body) => {
+export const updatePost = async (params, body) => {
     try {
         const updatedPost = await PostModel.findById(params.id);
         if (updatedPost.userId === body.userId) {
             await PostModel.updatedOne(
                 {
                 $set: body,
-                }, 
+                }
+                , 
                 { 
                 new: true,
                 }
