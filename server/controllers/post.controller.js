@@ -1,4 +1,4 @@
-import { createPost , getTimelinePost, likeAndDislike, updatePost } from "../services/post.service.js";
+import { createPost , getTimelinePost, likeAndDislike, updatePost ,  deletePost , getPost } from "../services/post.service.js";
 
 export const createPostController = async(req, res) => {
     try {
@@ -53,7 +53,7 @@ export const deletedPostController = async(req, res) => {
 
 export const likeAndDislikeController = async (req, res) =>{
     try {
-        const post = await likeAndDislike(req.params, res.body);
+        const post = await likeAndDislike(req.params, req.body);
         res.status(200).json({
             post,
             message: "Post action has been completed" ,

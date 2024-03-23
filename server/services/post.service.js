@@ -18,14 +18,14 @@ export const updatePost = async (params, body) => {
     try {
         const updatedPost = await PostModel.findById(params.id);
         if (updatedPost.userId === body.userId) {
-            await PostModel.updatedOne(
+            await PostModel.updateOne(
                 {
                 $set: body,
                 }
-                , 
-                { 
-                new: true,
-                }
+                // , 
+                // { 
+                // new: true,
+                // }
             );
             return updatedPost;
         } else {
@@ -54,10 +54,11 @@ export const likeAndDislike = async (params, body) => {
     try {
         const post = await PostModel.findById(params.id);
         if (!post.likes.includes(body.userId)) {
-            await post.updateOne({ $push:{ likes: body.userId } });
+            await post.updateOne({ $push: { likes: body.userId } });
         } else {
             await post.updateOne({ $pull: { likes: body.userId } });
         }
+        
         return post;
 
     } catch (error) {
